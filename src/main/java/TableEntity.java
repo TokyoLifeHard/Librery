@@ -7,6 +7,19 @@ public class TableEntity {
     private int books_on_the_hands;
     private int all_count_books;
 
+    @Override
+    public String toString() {
+        return "TableEntity{" +
+                "autor='" + autor + '\'' +
+                ", name_of_book='" + name_of_book + '\'' +
+                ", type='" + type + '\'' +
+                ", date_of_create='" + date_of_create + '\'' +
+                ", real_count_books=" + real_count_books +
+                ", books_on_the_hands=" + books_on_the_hands +
+                ", all_count_books=" + all_count_books +
+                '}';
+    }
+
     public TableEntity(){}
 
     public TableEntity(String autor, String name_of_book, String type, String date_of_create, int real_count_books, int books_on_the_hands, int all_count_books) {

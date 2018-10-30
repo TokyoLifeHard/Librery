@@ -1,3 +1,4 @@
+import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -21,17 +22,18 @@ public class ExelParser {
             e.printStackTrace();
         }
         //разбираем первый лист входного файла на объектную модель
+
         Sheet sheet = workBook.getSheetAt(1);
         Iterator<Row> it = sheet.iterator();
         //проходим по всему листу
         while (it.hasNext()) {
             TableEntity tableEntity = new TableEntity();
             Row row = it.next();
+            int lastcell = row.getLastCellNum();
             Iterator<Cell> cellIterator = row.iterator();
             while (cellIterator.hasNext()) {
                 Cell cell = cellIterator.next();
                 int cellType = cell.getCellType();
-
                 //перебираем возможные типы ячеек
                 switch (cellType) {
                     case Cell.CELL_TYPE_STRING:
@@ -45,10 +47,12 @@ public class ExelParser {
                         tableEntity.setBooks_on_the_hands((int)cell.getNumericCellValue());
                         break;
 
-                    case Cell.CELL_TYPE_FORMULA:
-                        tableEntity.setAll_count_books((int)cell.getCellFormula());
-                        break;
-
+//                    case Cell.CELL_TYPE_FORMULA:
+//                        tableEntity.setAll_count_books((int)cell.getCellFormula());
+//                        break;
+                }
+                if(lastcell==row.getLastCellNum()){
+                    tableEntity.setAll_count_books(tableEntity.getReal_count_books()+tableEntity.getBooks_on_the_hands());
                 }
             }
             tableEntities.add(tableEntity);

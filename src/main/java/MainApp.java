@@ -12,7 +12,10 @@ public class MainApp {
 //            System.out.println(b.toString());  }
 
         ExelParser parser = new ExelParser();
-        parser.Parse("U://Projects//Librery//Vydannye_materialnye_tsennosti.xls");
+        ArrayList<TableEntity> tableEntities = parser.Parse("U://Projects//Librery//Vydannye_materialnye_tsennosti.xls");
+        for (TableEntity t: tableEntities) {
+            System.out.println(t.toString());
+        }
 
     }
 
