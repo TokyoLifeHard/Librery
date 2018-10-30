@@ -1,4 +1,5 @@
 public class TableEntity {
+    private int numofrow;
     private String autor;
     private String name_of_book;
     private String type;
@@ -10,6 +11,7 @@ public class TableEntity {
     @Override
     public String toString() {
         return "TableEntity{" +
+                "numofrow='" + numofrow + '\'' +
                 "autor='" + autor + '\'' +
                 ", name_of_book='" + name_of_book + '\'' +
                 ", type='" + type + '\'' +
@@ -22,7 +24,8 @@ public class TableEntity {
 
     public TableEntity(){}
 
-    public TableEntity(String autor, String name_of_book, String type, String date_of_create, int real_count_books, int books_on_the_hands, int all_count_books) {
+    public TableEntity(int numofrow,String autor, String name_of_book, String type, String date_of_create, int real_count_books, int books_on_the_hands, int all_count_books) {
+        this.numofrow = numofrow;
         this.autor = autor;
         this.name_of_book = name_of_book;
         this.type = type;
@@ -30,6 +33,14 @@ public class TableEntity {
         this.real_count_books = real_count_books;
         this.books_on_the_hands = books_on_the_hands;
         this.all_count_books = all_count_books;
+    }
+
+    public int getNumofrow() {
+        return numofrow;
+    }
+
+    public void setNumofrow(int numofrow) {
+        this.numofrow = numofrow;
     }
 
     public String getAutor() {

@@ -24,36 +24,52 @@ public class ExelParser {
         //разбираем первый лист входного файла на объектную модель
 
         Sheet sheet = workBook.getSheetAt(1);
-        Iterator<Row> it = sheet.iterator();
+        Iterator<Row> rowIterator = sheet.iterator();
         //проходим по всему листу
-        while (it.hasNext()) {
+        while (rowIterator.hasNext()) {
             TableEntity tableEntity = new TableEntity();
-            Row row = it.next();
-            int lastcell = row.getLastCellNum();
+            Row row = rowIterator.next();
             Iterator<Cell> cellIterator = row.iterator();
             while (cellIterator.hasNext()) {
+                int cellNum = 0;
                 Cell cell = cellIterator.next();
                 int cellType = cell.getCellType();
                 //перебираем возможные типы ячеек
                 switch (cellType) {
                     case Cell.CELL_TYPE_STRING:
-                        tableEntity.setAutor(cell.getStringCellValue());
-                        tableEntity.setName_of_book(cell.getStringCellValue());
-                        tableEntity.setType(cell.getStringCellValue());
-                        tableEntity.setDate_of_create(cell.getStringCellValue());
+                        if(cellNum==1){
+                            tableEntity.setAutor(cell.getStringCellValue());
+                            cellNum++;
+                        }
+                        if(cellNum==2){
+                            tableEntity.setName_of_book(cell.getStringCellValue());
+                            cellNum++;
+                        }
+                        if (cellNum==3 ){
+                            tableEntity.setType(cell.getStringCellValue());
+                            cellNum++;
+                        }
+                        if(cellNum==4){
+                            tableEntity.setDate_of_create(cell.getStringCellValue());
+                            cellNum++;
+                        }
                         break;
                     case Cell.CELL_TYPE_NUMERIC:
-                        tableEntity.setReal_count_books((int)cell.getNumericCellValue());
-                        tableEntity.setBooks_on_the_hands((int)cell.getNumericCellValue());
+                        if(cellNum==0)
+                            tableEntity.setNumofrow((int)cell.getNumericCellValue());
+                            cellNum++;
+                        if(cellNum==5){
+                            tableEntity.setReal_count_books((int)cell.getNumericCellValue());
+                        }
+                        if(cellNum==6){
+                            tableEntity.setBooks_on_the_hands((int)cell.getNumericCellValue());
+                        }
                         break;
 
-//                    case Cell.CELL_TYPE_FORMULA:
-//                        tableEntity.setAll_count_books((int)cell.getCellFormula());
-//                        break;
+                    case Cell.CELL_TYPE_FORMULA:
+                        break;
                 }
-                if(lastcell==row.getLastCellNum()){
-                    tableEntity.setAll_count_books(tableEntity.getReal_count_books()+tableEntity.getBooks_on_the_hands());
-                }
+
             }
             tableEntities.add(tableEntity);
         }
