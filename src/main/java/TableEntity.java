@@ -1,30 +1,16 @@
 public class TableEntity {
-    private int numofrow;
+    private String numofrow;
     private String autor;
     private String name_of_book;
     private String type;
     private String date_of_create;
-    private int real_count_books;
-    private int books_on_the_hands;
-    private int all_count_books;
-
-    @Override
-    public String toString() {
-        return "TableEntity{" +
-                "numofrow='" + numofrow + '\'' +
-                "autor='" + autor + '\'' +
-                ", name_of_book='" + name_of_book + '\'' +
-                ", type='" + type + '\'' +
-                ", date_of_create='" + date_of_create + '\'' +
-                ", real_count_books=" + real_count_books +
-                ", books_on_the_hands=" + books_on_the_hands +
-                ", all_count_books=" + all_count_books +
-                '}';
-    }
+    private String real_count_books;
+    private String books_on_the_hands;
+    private String all_count_books;
 
     public TableEntity(){}
 
-    public TableEntity(int numofrow,String autor, String name_of_book, String type, String date_of_create, int real_count_books, int books_on_the_hands, int all_count_books) {
+    public TableEntity(String numofrow, String autor, String name_of_book, String type, String date_of_create, String real_count_books, String books_on_the_hands, String all_count_books) {
         this.numofrow = numofrow;
         this.autor = autor;
         this.name_of_book = name_of_book;
@@ -35,11 +21,27 @@ public class TableEntity {
         this.all_count_books = all_count_books;
     }
 
-    public int getNumofrow() {
+    public String getBooks_on_the_hands() {
+        return books_on_the_hands;
+    }
+
+    public void setBooks_on_the_hands(String books_on_the_hands) {
+        this.books_on_the_hands = books_on_the_hands;
+    }
+
+    public String getAll_count_books() {
+        return all_count_books;
+    }
+
+    public void setAll_count_books(String all_count_books) {
+        this.all_count_books = all_count_books;
+    }
+
+    public String getNumofrow() {
         return numofrow;
     }
 
-    public void setNumofrow(int numofrow) {
+    public void setNumofrow(String numofrow) {
         this.numofrow = numofrow;
     }
 
@@ -75,27 +77,11 @@ public class TableEntity {
         this.date_of_create = date_of_create;
     }
 
-    public int getReal_count_books() {
+    public String getReal_count_books() {
         return real_count_books;
     }
 
-    public void setReal_count_books(int real_count_books) {
+    public void setReal_count_books(String real_count_books) {
         this.real_count_books = real_count_books;
-    }
-
-    public int getBooks_on_the_hands() {
-        return books_on_the_hands;
-    }
-
-    public void setBooks_on_the_hands(int books_on_the_hands) {
-        this.books_on_the_hands = books_on_the_hands;
-    }
-
-    public int getAll_count_books() {
-        return all_count_books;
-    }
-
-    public void setAll_count_books(int all_count_books) {
-        this.all_count_books = all_count_books;
     }
 }
