@@ -7,5 +7,7 @@ public class MainApp {
         ArrayList<TableEntity> tableEntities = parser.Parse("U://Projects//" +
                                     "Librery//Vydannye_materialnye_tsennosti.xls");
         
+
+
     }
 }
