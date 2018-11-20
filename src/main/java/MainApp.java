@@ -6,5 +6,6 @@ public class MainApp {
         ExelParser parser = new ExelParser();
         ArrayList<TableEntity> tableEntities = parser.Parse("U://Projects//" +
                                     "Librery//Vydannye_materialnye_tsennosti.xls");
+        
     }
 }
