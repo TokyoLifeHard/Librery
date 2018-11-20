@@ -16,7 +16,7 @@ public class ExelParser {
         ArrayList<TableEntity> tableEntities = new ArrayList<TableEntity>();
         InputStream inputStream = null;
         HSSFWorkbook workBook = null;
-        Stack<String> ValuesFromTable = new Stack<String>();
+        ExtendedStack ValuesFromTable = new ExtendedStack();
 
         try {
             inputStream = new FileInputStream(path);
@@ -33,39 +33,48 @@ public class ExelParser {
             rowIterator.next();
         }
 
-
+        int count_rows = 0;
         while (rowIterator.hasNext()) {
 
             TableEntity tableEntity = new TableEntity();
             Row row = rowIterator.next();
             Iterator<Cell> cellIterator = row.iterator();
-
+            count_rows++;
             while (cellIterator.hasNext()) {
-
                 Cell cell = cellIterator.next();
                 int cellType = cell.getCellType();
                 switch (cellType) {
                     case Cell.CELL_TYPE_STRING:
-                        ValuesFromTable.push(cell.getStringCellValue());
+                        String s1 =  cell.getStringCellValue();
+                        ValuesFromTable.push(s1);
+                        //System.out.println(s1);
                         break;
                     case Cell.CELL_TYPE_NUMERIC:
-                        ValuesFromTable.push(Integer.toString((int) cell.getNumericCellValue()));
+                        String s2 = Integer.toString((int) cell.getNumericCellValue());
+                        ValuesFromTable.push(s2);
+                        //System.out.println(s2);
                         break;
                     case Cell.CELL_TYPE_FORMULA:
                         break;
                     default:
                         ValuesFromTable.push(null);
+                        //System.out.println("null");
                 }
             }
 
-            System.out.println(ValuesFromTable.pop());
-            System.out.println(ValuesFromTable.pop());
-            System.out.println(ValuesFromTable.pop());
-            System.out.println(ValuesFromTable.pop());
-            System.out.println(ValuesFromTable.pop());
-            System.out.println(ValuesFromTable.pop());
-            System.out.println(ValuesFromTable.pop());
-            System.out.println("---------------------------------------------------------------");
+            if (ValuesFromTable.isNotNull()) {
+                tableEntity.setNumofrow(ValuesFromTable.pop());
+                tableEntity.setAutor(ValuesFromTable.pop());
+                tableEntity.setType(ValuesFromTable.pop());
+                tableEntity.setDate_of_create(ValuesFromTable.pop());
+                tableEntity.setReal_count_books(ValuesFromTable.pop());
+                tableEntity.setBooks_on_the_hands(ValuesFromTable.pop());
+                tableEntities.add(tableEntity);
+            }
+            if (!ValuesFromTable.isNotNull()){
+                System.out.println("break");
+                break;
+            }
         }
         return tableEntities;
     }
