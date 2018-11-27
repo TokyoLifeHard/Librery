@@ -1,32 +1,33 @@
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Tools {
-    public static ArrayList<Book> selectBooks(){
-        Connection connection = null;
-        ArrayList<Book> books = null;
-
-        try {
-            connection = getConnection();
-            PreparedStatement SALLFBOOK = connection.prepareStatement("SELECT * FROM librery.book;");
-            ResultSet resultSet = SALLFBOOK.executeQuery();
-            books = new ArrayList<Book>();
-            while(resultSet.next()){
-                int id = resultSet.getInt("id_book");
-                String name_of_book = resultSet.getString("name_of_book");
-                String date_of_create = resultSet.getString("date_of_create");
-                int id_type = resultSet.getInt("id_type");
-                int id_autor = resultSet.getInt("id_autor");
-                books.add(new Book(id,name_of_book,date_of_create,id_autor,id_type));
-            }
-        }
-        catch (SQLException e){
-            e.printStackTrace();
-        }
-        closeConnection(connection);
-
-        return books;
-    }
+//    public static ArrayList<Book> selectBooks(){
+//        Connection connection = null;
+//        ArrayList<Book> books = null;
+//
+//        try {
+//            connection = getConnection();
+//            PreparedStatement SALLFBOOK = connection.prepareStatement("SELECT * FROM librery.book;");
+//            ResultSet resultSet = SALLFBOOK.executeQuery();
+//            books = new ArrayList<Book>();
+//            while(resultSet.next()){
+//                int id = resultSet.getInt("id_book");
+//                String name_of_book = resultSet.getString("name_of_book");
+//                String date_of_create = resultSet.getString("date_of_create");
+//                int id_type = resultSet.getInt("id_type");
+//                int id_autor = resultSet.getInt("id_autor");
+//                books.add(new Book(id,name_of_book,date_of_create,id_autor,id_type));
+//            }
+//        }
+//        catch (SQLException e){
+//            e.printStackTrace();
+//        }
+//        closeConnection(connection);
+//
+//        return books;
+//    }
 
     public static ArrayList<Student> selectStudents(){
         Connection connection = null;
@@ -79,30 +80,30 @@ public class Tools {
 
     }
 
-    public  static ArrayList<Autor> selectAutor(){
-        Connection connection = null;
-        ArrayList<Autor> autors = null;
-
-        try {
-            connection = getConnection();
-            PreparedStatement SALLFAUTOR = connection.prepareStatement("SELECT * FROM librery.autor;");
-            ResultSet resultSet = SALLFAUTOR.executeQuery();
-            autors = new ArrayList<Autor>();
-            while(resultSet.next()){
-                int id_autor = resultSet.getInt("id_autor");
-                String first_name = resultSet.getString("first_name");
-                String secound_name = resultSet.getString("secound_name");
-                String third_name = resultSet.getString("third_name");
-                autors.add(new Autor(id_autor,first_name,secound_name,third_name));
-            }
-        }
-        catch (SQLException e){
-            e.printStackTrace();
-        }
-        closeConnection(connection);
-
-        return autors;
-    }
+//    public  static ArrayList<Autor> selectAutor(){
+//        Connection connection = null;
+//        ArrayList<Autor> autors = null;
+//
+//        try {
+//            connection = getConnection();
+//            PreparedStatement SALLFAUTOR = connection.prepareStatement("SELECT * FROM librery.autor;");
+//            ResultSet resultSet = SALLFAUTOR.executeQuery();
+//            autors = new ArrayList<Autor>();
+//            while(resultSet.next()){
+//                int id_autor = resultSet.getInt("id_autor");
+//                String first_name = resultSet.getString("first_name");
+//                String secound_name = resultSet.getString("secound_name");
+//                String third_name = resultSet.getString("third_name");
+//                autors.add(new Autor(id_autor,first_name,secound_name,third_name));
+//            }
+//        }
+//        catch (SQLException e){
+//            e.printStackTrace();
+//        }
+//        closeConnection(connection);
+//
+//        return autors;
+//    }
 
     public  static ArrayList<Book_on_hadn> selectBookOnHands(){
         Connection connection = null;
@@ -176,5 +177,29 @@ public class Tools {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public ArrayList<Autor> parseAutorData(ArrayList<TableEntity> tableEntities){
+        ArrayList<Autor> Autors = new ArrayList<Autor>();
+        Iterator<TableEntity> tableEntityIterator = tableEntities.iterator();
+
+        while (tableEntityIterator.hasNext()) {
+            TableEntity tableEntity = tableEntityIterator.next();
+            Autor autor = new Autor(null,tableEntity.getAutor());
+            Autors.add(autor);
+        }
+        return Autors;
+    }
+
+    public static ArrayList<Book> parseBookData(ArrayList<TableEntity> tableEntities){
+        ArrayList<Book> Books = new ArrayList<Book>();
+        Iterator<TableEntity> tableEntityIterator = tableEntities.iterator();
+
+        while (tableEntityIterator.hasNext()) {
+            TableEntity tableEntity = tableEntityIterator.next();
+            Book book = new Book(tableEntity.getDate_of_create(),tableEntity.getName_of_book());
+            Books.add(book);
+        }
+        return Books;
     }
 }

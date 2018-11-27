@@ -21,6 +21,20 @@ public class TableEntity {
         this.all_count_books = all_count_books;
     }
 
+    @Override
+    public String toString() {
+        return "TableEntity{" +
+                "numofrow='" + numofrow + '\'' +
+                ", autor='" + autor + '\'' +
+                ", name_of_book='" + name_of_book + '\'' +
+                ", type='" + type + '\'' +
+                ", date_of_create='" + date_of_create + '\'' +
+                ", real_count_books='" + real_count_books + '\'' +
+                ", books_on_the_hands='" + books_on_the_hands + '\'' +
+                ", all_count_books='" + all_count_books + '\'' +
+                '}';
+    }
+
     public String getBooks_on_the_hands() {
         return books_on_the_hands;
     }

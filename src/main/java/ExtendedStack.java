@@ -26,9 +26,7 @@ class ExtendedStack {
     }
 
     public int getSize(){
-        int copyconter = counter;
-        counter = 0;
-        return copyconter;
-
+        return counter;
     }
+
 }
