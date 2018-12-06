@@ -1,19 +1,26 @@
 public class Book {
-   private String id_of_book;
-   private String name_of_book;
-   private String date_of_create;
-   private String id_autor;
-   private String id_type;
+    private String id_of_book;
+    private String name_of_book;
+    private String date_of_create;
+    private String autorName;
+    private String id_autor;
+    private String id_type;
 
     @Override
     public String toString() {
         return "Book{" +
-                "id_of_book='" + id_of_book + '\'' +
-                ", name_of_book='" + name_of_book + '\'' +
+                "name_of_book='" + name_of_book + '\'' +
                 ", date_of_create='" + date_of_create + '\'' +
-                ", id_autor='" + id_autor + '\'' +
-                ", id_type='" + id_type + '\'' +
+                ", autorName='" + autorName + '\'' +
                 '}';
+    }
+
+    public String getAutorName() {
+        return autorName;
+    }
+
+    public void setAutorName(String autorName) {
+        this.autorName = autorName;
     }
 
     public String getId_of_book() {
@@ -67,5 +74,11 @@ public class Book {
     public Book(String name_of_book, String date_of_create) {
         this.name_of_book = name_of_book;
         this.date_of_create = date_of_create;
+    }
+
+    public Book(String name_of_book, String date_of_create, String autorName) {
+        this.name_of_book = name_of_book;
+        this.date_of_create = date_of_create;
+        this.autorName = autorName;
     }
 }

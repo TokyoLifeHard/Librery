@@ -2,6 +2,7 @@ public class Accounting {
     int id_book;
     int real_count;
     int total_count;
+
     public Accounting(int id_book, int real_count, int total_count) {
         this.id_book = id_book;
         this.real_count = real_count;

@@ -64,27 +64,28 @@ public class ExelParser {
             }
 
             if (stack.isNotNull()) {
-                tableEntity.setReal_count_books(stack.pop());
+                stack.pop();
+                stack.pop();
                 tableEntity.setBooks_on_the_hands(stack.pop());
-                tableEntity.setAll_count_books(stack.pop());
+                tableEntity.setReal_count_books(stack.pop());
                 tableEntity.setDate_of_create(stack.pop());
                 tableEntity.setType(stack.pop());
                 tableEntity.setName_of_book(stack.pop());
                 tableEntity.setAutor(stack.pop());
                 tableEntity.setNumofrow(stack.pop());
                 tableEntities.add(tableEntity);
+
             } else {
                 break;
             }
-            System.out.println("НОМЕР СТРОКИ "+tableEntity.getNumofrow());
-            System.out.println("АВТОР "+tableEntity.getAutor());
-            System.out.println("НАЗВАНИЕ КНИГИ "+tableEntity.getName_of_book());
-            System.out.println("ТИП КНИГИ "+tableEntity.getType());
-            System.out.println("ДАТА СОЗДАНИЯ "+tableEntity.getDate_of_create());
-            System.out.println("ОСТАТОК "+tableEntity.getAll_count_books());
-            System.out.println("НА РУКАХ "+tableEntity.getBooks_on_the_hands());
-            System.out.println("РЕАЛЬНОЕ КОЛ-ВО "+tableEntity.getReal_count_books());
-            System.out.println("---------------------------------");
+//            System.out.println("НОМЕР СТРОКИ "+tableEntity.getNumofrow());
+//            System.out.println("АВТОР "+tableEntity.getAutor());
+//            System.out.println("НАЗВАНИЕ КНИГИ "+tableEntity.getName_of_book());
+//            System.out.println("ТИП КНИГИ "+tableEntity.getType());
+//            System.out.println("ДАТА СОЗДАНИЯ "+tableEntity.getDate_of_create());
+//            System.out.println("ОСТАТОК "+tableEntity.getReal_count_books());
+//            System.out.println("НА РУКАХ "+tableEntity.getBooks_on_the_hands());
+//            System.out.println("---------------------------------");
             stack = null;
         }
         return tableEntities;
